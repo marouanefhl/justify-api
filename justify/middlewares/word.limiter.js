@@ -5,7 +5,7 @@ const limiterPeriod = require('../../common/config/env.config').limiterPeriod
 const redis = require('redis')
 const fs = require("fs");
 
-const client = redis.createClient(process.env.REDIS_URL, {
+const redisClient = redis.createClient(process.env.REDIS_URL, {
     tls: {
         rejectUnauthorized: false
     }
