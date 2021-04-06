@@ -2,14 +2,8 @@ const redisPort = require('../../common/config/env.config').redisPort
 const wordLimit = require('../../common/config/env.config').wordLimit
 const limiterPeriod = require('../../common/config/env.config').limiterPeriod
 
-const redis = require('redis')
-const fs = require("fs");
-
-const redisClient = redis.createClient(process.env.REDIS_URL, {
-    tls: {
-        rejectUnauthorized: false
-    }
-});
+const redis = require("redis")
+const redisClient = redis.createClient(process.env.REDIS_URL)
 const moment = require('moment')
 
 // Méthode perWordLimit
