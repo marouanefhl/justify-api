@@ -1,5 +1,4 @@
 const justifySize = require('../../common/config/env.config').justifySize
-const lineBreak = "%0D%0A";
 
 // Méthode justify
 // 
@@ -56,9 +55,9 @@ exports.justify = (req, res) => {
                 linesJustified[y] = lines[y].join(' ')
             }
         }
-        paragraphsJustified[x] = linesJustified.join(lineBreak)
+        paragraphsJustified[x] = linesJustified.join('\n')
     }
-    justifiedText = paragraphsJustified.join(lineBreak)
+    justifiedText = paragraphsJustified.join('\n')
     res.set('Content-Type', 'text/plain');
     res.status(200).send([justifiedText])
 }
