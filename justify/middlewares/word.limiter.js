@@ -20,14 +20,16 @@ const moment = require('moment')
 // mots envoyés dans la période
 // 
 exports.perWordLimit = (req, res, next) => {
-    let userId = req.jwt.userId
+    console.log("Rate limiting : justify")
 
+    let userId = req.jwt.userId
     var str = req.body.replace(/(^\s*)|(\s*$)/gi,"") // En utilisant des expressions régulières, on isole les mots afin de pouvoir les compter
     str = str.replace(/[ ]{2,}/gi," ")
     str = str.replace(/\n /,"\n")
     var wordCount = str.split(' ').length
 
     if(wordCount > wordLimit) {
+        console.log("Rate limiting : fail")
         return res.status(402).send() // Renvoie une erreur 402 si la requête contient un nombre de mots dépassant la limite
     }
 
@@ -48,14 +50,17 @@ exports.perWordLimit = (req, res, next) => {
                         'startTime': moment().unix()
                     }
                     redisClient.set(userId, JSON.stringify(body))
+                    console.log("Rate limiting : pass")
                     next()
                 }
                 if(difference < 1) { // Utilisateur toujours dans la même période limitante
                     if(data.count + wordCount > wordLimit) { // Nombre de mots de la requête + nombre de mots déjà traités est supérieur à la limite
+                        console.log("Rate limiting : fail")
                         return res.status(402).send()
                     }
                     data.count += wordCount
                     redisClient.set(userId, JSON.stringify(data)) // Met à jour le nombre de mots
+                    console.log("Rate limiting : pass")
                     next()
                 }
             })
@@ -65,6 +70,7 @@ exports.perWordLimit = (req, res, next) => {
                 'startTime': moment().unix()
             }
             redisClient.set(userId, JSON.stringify(body))
+            console.log("Rate limiting : pass")
             next()
         }
     })
