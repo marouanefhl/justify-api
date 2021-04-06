@@ -27,6 +27,8 @@ UsersRouter.routesConfig(app)
 TokenRouter.routesConfig(app)
 JustifyRouter.routesConfig(app)
 
-app.listen(config.port, () => {
-    console.log('Serveur à l\'écoute, port : %s', config.port)
+const port = process.env.PORT || config.port;
+
+app.listen(port, () => {
+    console.log('Serveur à l\'écoute, port : %s', port)
 })
