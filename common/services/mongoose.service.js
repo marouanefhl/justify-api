@@ -11,7 +11,7 @@ const options = {
 
 const connectWithRetry = () => {
     console.log('Connexion à la BD MongoDB')
-    mongoose.connect("mongodb://localhost:27017/justify-api", 
+    mongoose.connect("mongodb+srv://marouanef:RftMhvbqwpSytlSD@cluster0.kpt84.mongodb.net/justify-api-db?retryWrites=true&w=majority", 
     options).then(() => {
         console.log('Connexion à la BD réussie')
     }).catch(err => {
