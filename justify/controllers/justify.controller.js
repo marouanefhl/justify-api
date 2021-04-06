@@ -35,7 +35,7 @@ exports.justify = (req, res) => {
         var linesJustified = []
         for(var y in lines) { // Justification du texte
             if(y == lines.length - 1) { // Cas de la dernière ligne
-                linesJustified[y] = lines[y].join(' ')
+                linesJustified[y] = lines[y].join(" ")
             } else { 
                 var currentLength = lines[y].length - 1
                 lines[y].forEach(word => {
@@ -52,7 +52,7 @@ exports.justify = (req, res) => {
                     currentLength++
                     randomWord.splice(randomIndex, 1) // On utilise l'indice obtenu aléatoirement pour rajouter un espace, puis on supprime celui-ci de l'array d'indices
                 }
-                linesJustified[y] = lines[y].join(' ')
+                linesJustified[y] = lines[y].join(" ")
             }
         }
         paragraphsJustified[x] = linesJustified.join("\n")
