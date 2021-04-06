@@ -55,9 +55,9 @@ exports.justify = (req, res) => {
                 linesJustified[y] = lines[y].join(' ')
             }
         }
-        paragraphsJustified[x] = linesJustified.join('\n')
+        paragraphsJustified[x] = linesJustified.join("\n")
     }
-    justifiedText = paragraphsJustified.join('\n')
+    justifiedText = paragraphsJustified.join("\n")
     res.set('Content-Type', 'text/plain');
     res.status(200).send([justifiedText])
 }
