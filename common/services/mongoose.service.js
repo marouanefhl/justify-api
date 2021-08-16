@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const { config } = require('dotenv');
+
 let count = 0
 
 const options = {
@@ -10,8 +12,10 @@ const options = {
 }
 
 const connectWithRetry = () => {
+    config()
+    const uri = process.env.DB_URI
     console.log('Connexion à la BD MongoDB')
-    mongoose.connect("mongodb+srv://marouanef:RftMhvbqwpSytlSD@cluster0.kpt84.mongodb.net/justify-api-db?retryWrites=true&w=majority", 
+    mongoose.connect(uri, 
     options).then(() => {
         console.log('Connexion à la BD réussie')
     }).catch(err => {
